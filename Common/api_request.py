@@ -21,7 +21,7 @@ class Api_Request():
                 raise e
             return res
         else:
-            logging.error("输入的请求方法不对")
+            logging.error("输入的请求方法错误")
 
 
     def api_request_data(self, url=None, method=None, cookie=None, data=None, header=None):  # 封装data请求
