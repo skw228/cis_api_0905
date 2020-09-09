@@ -1,4 +1,4 @@
-class get_data():
+class Get_Data():
     data = None  # 请求入参替换
     url = None  # 请求url替换
     regular = None  # 正则提取出来的变量值

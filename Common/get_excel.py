@@ -1,19 +1,19 @@
 from openpyxl import load_workbook
-from Common.Read_Config import Readconfig
-from Common.Project_Path import *
+from Common.get_config import Get_Config
+from Common.get_path import *
 
 
-class Du_Excel_Case():
-    def get_case(self, file_name):  # 读EXcel测试用例
+class Get_Excel():
+    def get_excel(self, file_name):  # 读EXcel测试用例
         wb = load_workbook(file_name)
-        title_name = eval(Readconfig.get_config(case_config_path, "TITLE", "title"))
+        title_name = eval(Get_Config.get_config(case_config_path, "TITLE", "title"))
         title = []
         for sheet_name in title_name:
             sheet = wb[sheet_name]
             for j in range(1, sheet.max_column + 1):
                 title.append(sheet.cell(1, j).value)
         test_case = []
-        mode = eval(Readconfig.get_config(case_config_path, "MODE", "mode"))
+        mode = eval(Get_Config.get_config(case_config_path, "MODE", "mode"))
         for sheet_name in mode:
             sheet = wb[sheet_name]
             if mode[sheet_name] == "all":
@@ -32,9 +32,9 @@ class Du_Excel_Case():
                     test_case.append(data)
         return test_case
 
-    def get_variable(self, file_name):  # 读EXcel变量基础数据
+    def get_excel_variable(self, file_name):  # 读EXcel变量基础数据
         wb = load_workbook(file_name)
-        mode = eval(Readconfig.get_config(case_config_path, "MODE1", "mode1"))
+        mode = eval(Get_Config.get_config(case_config_path, "MODE1", "mode1"))
         titie = []
         for sheet_name in mode:
             sheet = wb[sheet_name]
@@ -50,5 +50,5 @@ class Du_Excel_Case():
 
 
 if __name__ == '__main__':
-    res = Du_Excel_Case().get_case(test_case_path)
+    res = Get_Excel().get_excel(test_case_path)
     print(res)

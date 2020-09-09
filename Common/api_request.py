@@ -1,30 +1,31 @@
 import requests
-from Common.Write_Log import Log
+import logging
 
 
-class HttpRequest():
-    def http_request_json(self, url=None, method=None, cookie=None, data=None, header=None, ):  # 封装json请求
-        Log().info(
+class Api_Request():
+    def api_request_json(self, url=None, method=None, cookie=None, data=None, header=None, ):  # 封装json请求
+        logging.info(
             "请求的入参url:{}...method:{}...cookie:{}...data:{}...header:{}".format(url, method, cookie, data, header))
         if method.upper() == "GET":
             try:
                 res = requests.get(url, json=data, cookies=cookie, headers=header)
             except Exception as e:
-                Log().error("get请求错误：{}".format(e))
+                logging.error("get请求错误：{}".format(e))
                 raise e
             return res
         elif method.upper() == "POST":
             try:
                 res = requests.post(url, json=data, cookies=cookie, headers=header)
             except Exception as e:
-                Log().error("post请求错误：{}".format(e))
+                logging.error("post请求错误：{}".format(e))
                 raise e
             return res
         else:
-            Log().error("输入的请求方法不对")
+            logging.error("输入的请求方法不对")
 
-    def http_request_data(self, url=None, method=None, cookie=None, data=None, header=None):  # 封装data请求
-        Log().info(
+
+    def api_request_data(self, url=None, method=None, cookie=None, data=None, header=None):  # 封装data请求
+        logging.info(
             "请求的入参url:{}...method:{}...cookie:{}...data:{}...header:{}".format(url, method, cookie, data, header))
         if method.upper() == "GET":
             try:
@@ -39,4 +40,4 @@ class HttpRequest():
                 raise e
             return res
         else:
-            Log().error("输入的请求方法不对")
+            logging.error("输入的请求方法不对")
